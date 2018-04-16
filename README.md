@@ -20,5 +20,14 @@ ab74b505-909a-4b23-8634-8b86c7effe72
 ```
 convert this 8-4-4-4-12 big-endian to little endian for the ARM code.
 
+modify the code
+
 flash the S132 v5.0.0 SoftDevice and then flash our application.
 
+use nRF connect to scan for the services.
+
+### 3 add a custom characteristic to the custom service
+
+
+## reference
+[custom BLE service](https://github.com/bjornspockeli/custom_ble_service_example)
