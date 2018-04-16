@@ -97,3 +97,49 @@ uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
     return custom_value_char_add(p_cus, p_cus_init);
 }
 
+/**@brief Function for handling the Connect event.
+ *
+ * @param[in]   p_cus       Custom Service structure.
+ * @param[in]   p_ble_evt   Event received from the BLE stack.
+ */
+static void on_connect(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
+{
+    p_cus->conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
+}
+
+/**@brief Function for handling the Disconnect event.
+ *
+ * @param[in]   p_cus       Custom Service structure.
+ * @param[in]   p_ble_evt   Event received from the BLE stack.
+ */
+static void on_disconnect(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
+{
+    UNUSED_PARAMETER(p_ble_evt);
+    p_cus->conn_handle = BLE_CONN_HANDLE_INVALID;
+}
+
+void ble_cus_on_ble_evt( ble_evt_t const * p_ble_evt, void * p_context)
+{
+    ble_cus_t * p_cus = (ble_cus_t *) p_context;
+    
+    if (p_cus == NULL || p_ble_evt == NULL)
+    {
+        return;
+    }
+    
+    switch (p_ble_evt->header.evt_id)
+    {
+        case BLE_GAP_EVT_CONNECTED:
+            on_connect(p_cus, p_ble_evt);
+            break;
+
+        case BLE_GAP_EVT_DISCONNECTED:
+            on_disconnect(p_cus, p_ble_evt);
+            break;
+
+        default:
+            // No implementation needed.
+            break;
+    }
+}
+

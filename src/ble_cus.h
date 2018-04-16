@@ -11,14 +11,6 @@
 #define CUSTOM_SERVICE_UUID               0x1400
 #define CUSTOM_VALUE_CHAR_UUID            0x1401
 
-/**@brief   Macro for defining a ble_cus instance.
- *
- * @param   _name   Name of the instance.
- * @hideinitializer
- */
-#define BLE_CUS_DEF(_name) \
-static ble_cus_t _name;   
-
 /**@brief Custom Service init structure. This contains all options and data needed for
  *        initialization of the service.*/
 typedef struct
@@ -59,4 +51,26 @@ uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init);
  */
 /*
 static uint32_t custom_value_char_add(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init);
-*/ 
+*/
+
+/**@brief Function for handling the Application's BLE Stack events.
+ *
+ * @details Handles all events from the BLE stack of interest to the Battery Service.
+ *
+ * @note 
+ *
+ * @param[in]   p_ble_evt  Event received from the BLE stack.
+ * @param[in]   p_context  Custom Service structure.
+ */
+void ble_cus_on_ble_evt( ble_evt_t const * p_ble_evt, void * p_context);
+
+/**@brief   Macro for defining a ble_cus instance.
+ *
+ * @param   _name   Name of the instance.
+ * @hideinitializer
+ */
+#define BLE_CUS_DEF(_name) \
+static ble_cus_t _name; \
+NRF_SDH_BLE_OBSERVER(_name ## _obs, BLE_HRS_BLE_OBSERVER_PRIO, \
+  ble_cus_on_ble_evt, &_name)
+ 

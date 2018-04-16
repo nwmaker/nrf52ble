@@ -28,6 +28,12 @@ use nRF connect to scan for the services.
 
 ### 3 add a custom characteristic to the custom service
 
+After flashing the App, use nRF Connect to check.
+
+### 4 handle events from the SoftDevice
+
+Start to handle both connect and disconnect events from the SoftDevice
+
 
 ## reference
 [custom BLE service](https://github.com/bjornspockeli/custom_ble_service_example)
