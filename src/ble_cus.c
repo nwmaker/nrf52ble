@@ -75,6 +75,7 @@ uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
     ble_uuid_t ble_uuid;
 
     // Initialize service structure
+    p_cus->evt_handler               = p_cus_init->evt_handler;
     p_cus->conn_handle               = BLE_CONN_HANDLE_INVALID;
 
     // Add Custom Service UUID - vendor-specific UUID
@@ -105,6 +106,13 @@ uint32_t ble_cus_init(ble_cus_t * p_cus, const ble_cus_init_t * p_cus_init)
 static void on_connect(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
 {
     p_cus->conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
+
+    // To handle the custom service events
+    ble_cus_evt_t evt;
+
+    evt.evt_type = BLE_CUS_EVT_CONNECTED;
+
+    p_cus->evt_handler(p_cus, &evt);
 }
 
 /**@brief Function for handling the Disconnect event.

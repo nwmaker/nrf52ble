@@ -124,6 +124,32 @@ static uint16_t m_conn_handle = BLE_CONN_HANDLE_INVALID;                        
  *  BLE_XYZ_DEF(m_xyz);
  */
 
+/**@brief Function for handling the Custom Service Service events.
+ *
+ * @details This function will be called for all Custom Service events which are passed to
+ *          the application.
+ *
+ * @param[in]   p_cus_service  Custom Service structure.
+ * @param[in]   p_evt          Event received from the Custom Service.
+ *
+ */
+static void on_cus_evt(ble_cus_t     * p_cus_service,
+                       ble_cus_evt_t * p_evt)
+{
+    switch(p_evt->evt_type)
+    {
+        case BLE_CUS_EVT_CONNECTED:
+            break;
+
+        case BLE_CUS_EVT_DISCONNECTED:
+              break;
+
+        default:
+              // No implementation needed.
+              break;
+    }
+}
+
 // YOUR_JOB: Use UUIDs for service(s) used in your application.
 static ble_uuid_t m_adv_uuids[] = {
   {CUSTOM_SERVICE_UUID, BLE_UUID_TYPE_VENDOR_BEGIN}
@@ -368,6 +394,8 @@ static void services_init(void)
     // permission to write to or read from the characteristic value
     BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.custom_value_char_attr_md.read_perm);
     BLE_GAP_CONN_SEC_MODE_SET_OPEN(&cus_init.custom_value_char_attr_md.write_perm);
+    // Set the cus event handler
+    cus_init.evt_handler                = on_cus_evt;
 	
     err_code = ble_cus_init(&m_cus, &cus_init);
     APP_ERROR_CHECK(err_code);	
