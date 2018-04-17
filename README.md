@@ -34,6 +34,13 @@ After flashing the App, use nRF Connect to check.
 
 Start to handle both connect and disconnect events from the SoftDevice
 
+### 5 handle the write event from the SoftDevice
+
+Check ble_gatts_evt_write_t const *p_evt_write. It has a data field which can be used to do something.
+
+
+
+
 
 ## reference
 [custom BLE service](https://github.com/bjornspockeli/custom_ble_service_example)

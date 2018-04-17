@@ -118,6 +118,23 @@ static void on_disconnect(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
     p_cus->conn_handle = BLE_CONN_HANDLE_INVALID;
 }
 
+/**@brief Function for handling the Write event.
+ *
+ * @param[in]   p_cus       Custom Service structure.
+ * @param[in]   p_ble_evt   Event received from the BLE stack.
+ */
+static void on_write(ble_cus_t * p_cus, ble_evt_t const * p_ble_evt)
+{
+    ble_gatts_evt_write_t const * p_evt_write = &p_ble_evt->evt.gatts_evt.params.write;
+    
+    // Check if the handle passed with the event matches the Custom Value Characteristic handle.
+    if (p_evt_write->handle == p_cus->custom_value_handles.value_handle)
+    {
+        // Put specific task
+        nrf_gpio_pin_toggle(LED_4); 
+    }
+}
+
 void ble_cus_on_ble_evt( ble_evt_t const * p_ble_evt, void * p_context)
 {
     ble_cus_t * p_cus = (ble_cus_t *) p_context;
@@ -137,6 +154,9 @@ void ble_cus_on_ble_evt( ble_evt_t const * p_ble_evt, void * p_context)
             on_disconnect(p_cus, p_ble_evt);
             break;
 
+        case BLE_GATTS_EVT_WRITE:
+            on_write(p_cus, p_ble_evt);
+            break;
         default:
             // No implementation needed.
             break;
