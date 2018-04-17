@@ -5,8 +5,8 @@
 - [x] use armgcc
 - [x] use [nRF52832](https://www.nordicsemi.com/eng/Products/Bluetooth-low-energy/nRF52832)
 - [x] use S132 v6.0.0 (BLE stack for both central and periperal)
-- [x] use nRF52 DK
-- [x] use JLink
+- [x] use [nRF52 DK](https://www.nordicsemi.com/eng/Products/Bluetooth-low-energy/nRF52-DK)
+- [x] use Segger JLink
 - [x] test with nRF Connect app
 
 ## BLE custom service
@@ -15,7 +15,7 @@
 
 copy and modify nRF5_SDK_15.0.0_a53641a/examples/ble_peripheral/ble_app_template
 
-### create the custom service
+### start to create the custom service
 
 create a 128-bit UUID [here](https://www.uuidgenerator.net/version4)
 ```
