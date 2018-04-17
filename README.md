@@ -1,13 +1,15 @@
 # nRF52 BLE
 
-## setup
+## Setup
 - [x] use Nordic SDK nRF5 v15.0.0
 - [x] use armgcc
 - [x] use [nRF52832](https://www.nordicsemi.com/eng/Products/Bluetooth-low-energy/nRF52832)
 - [x] use S132
+- [x] use nRF52 DK
+- [x] use JLink
 - [x] test with nRF Connect
 
-## custom BLE
+## BLE custom service
 
 ### use the template from SDK 
 
@@ -58,5 +60,5 @@ Add custom service events and its handler. when the BLE_GAP_EVT_CONNECTED is rec
 
 Timer drive the value change. The change is sent out by the notification.
 
-## reference
+## Reference
 [custom BLE service](https://github.com/bjornspockeli/custom_ble_service_example)
