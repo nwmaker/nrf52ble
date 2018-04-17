@@ -54,7 +54,9 @@ struct ble_gatts_evt_write_t {
 
 Add custom service events and its handler. when the BLE_GAP_EVT_CONNECTED is received from the SoftDevice, pass it to on_connect() in ble_cus.c. There it is converted to BLE_CUS_EVT_CONNECTED.
 
+### notify the custom characteristic value changes with a timer
 
+Timer drive the value change. The change is sent out by the notification.
 
 ## reference
 [custom BLE service](https://github.com/bjornspockeli/custom_ble_service_example)
